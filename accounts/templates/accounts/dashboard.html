@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Customer Dashboard</title>
+</head>
+<body>
+
+    <h1>Welcome, {{ request.user.first_name }}!</h1>
+
+    <h2>Subscription Management System</h2>
+
+    <p>Email: {{ request.user.email }}</p>
+
+    <p>Role: {{ profile.get_role_display }}</p>
+
+    <h3>Your Customer Dashboard</h3>
+
+    <p>Welcome to your account.</p>
+
+    <a href="{% url 'logout' %}">Logout</a>
+
+</body>
+</html>
