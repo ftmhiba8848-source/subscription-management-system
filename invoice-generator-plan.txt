@@ -1,0 +1,51 @@
+INVOICE GENERATOR PLAN
+
+GOAL
+Create one invoice for each active subscription for each billing period.
+Never bill the same subscription twice for the same period.
+
+INPUT
+- A subscription (from subscription_app)
+- The billing period start date
+
+STEPS
+1. Find the subscription and check that it is active.
+2. Check if an invoice already exists for this subscription and period_start.
+   If yes, stop. Do not create another one.
+3. Create the Invoice.
+4. Create InvoiceLines (one for each plan or product on the subscription).
+5. Apply the discount, if there is one.
+6. Add the tax.
+7. Calculate the total and save it on the Invoice.
+
+
+HOW THE TOTAL IS CALCULATED
+1. Line total = quantity x unit price (for each line)
+2. Subtotal = add up all line totals
+3. Discount amount = taken off the subtotal
+4. Taxable amount = subtotal - discount
+5. Tax amount = taxable amount x tax rate
+6. Total = taxable amount + tax amount
+
+EXAMPLE
+Subtotal 1000, discount 10% = 100, taxable 900
+Tax 18% = 162, total = 1062
+
+RULES
+- Use Decimal for all money, never float.
+- Round every amount to 2 decimal places.
+- If something fails halfway, save nothing (all or nothing).
+
+WHEN IT RUNS
+- Once a day, for subscriptions whose next billing date is today or earlier.
+- Also by hand, from a "Generate invoice" button for one subscription.
+
+IF SOMETHING GOES WRONG
+- Subscription not active: skip it and write a log line.
+- Invoice already exists: skip it (not an error).
+- Missing tax or plan data: stop, save nothing, and write the reason in the log.
+
+OPEN QUESTIONS FOR THE TEAM
+- Is the discount applied before the tax?
+- What is the name of Member 2's model (Subscription)?
+- How long do customers have to pay (due date)?
