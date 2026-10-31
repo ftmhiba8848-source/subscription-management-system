@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Product Management</title>
+</head>
+<body>
+
+    <h1>Product Management</h1>
+
+    <a href="{% url 'add_product' %}">Add New Product</a>
+
+    <table border="1" cellpadding="10">
+        <tr>
+            <th>Name</th>
+            <th>Type</th>
+            <th>Sales Price</th>
+            <th>Cost Price</th>
+            <th>Status</th>
+            <th>Actions</th>
+        </tr>
+
+        {% for product in products %}
+        <tr>
+            <td>{{ product.name }}</td>
+            <td>{{ product.get_product_type_display }}</td>
+            <td>{{ product.sales_price }}</td>
+            <td>{{ product.cost_price }}</td>
+            <td>{{ product.is_active }}</td>
+
+            <td>
+                <a href="{% url 'edit_product' product.id %}">Edit</a>
+
+                <a href="{% url 'delete_product' product.id %}">Delete</a>
+            </td>
+        </tr>
+        {% empty %}
+        <tr>
+            <td colspan="6">No products available.</td>
+        </tr>
+        {% endfor %}
+
+    </table>
+
+</body>
+</html>
