@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Finance Dashboard</title>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 30px; background: #f5f6fa; }
+    .cards { display: flex; gap: 16px; flex-wrap: wrap; }
+    .card { background: white; padding: 20px; border-radius: 8px; min-width: 200px; box-shadow: 0 1px 4px #0002; }
+    .card h3 { margin: 0; font-size: 14px; color: #666; }
+    .card p { margin: 8px 0 0; font-size: 26px; font-weight: bold; }
+    .red p { color: #c0392b; }
+    table { margin-top: 24px; border-collapse: collapse; background: white; }
+    td, th { padding: 8px 14px; border-bottom: 1px solid #ddd; text-align: left; }
+  </style>
+</head>
+<body>
+  <h1>Finance Dashboard</h1>
+  <div class="cards">
+    <div class="card"><h3>Total Invoiced</h3><p>{{ total_invoiced }}</p></div>
+    <div class="card"><h3>Total Collected</h3><p>{{ total_collected }}</p></div>
+    <div class="card"><h3>Outstanding</h3><p>{{ outstanding }}</p></div>
+    <div class="card red"><h3>Overdue ({{ overdue_count }} invoices)</h3><p>{{ overdue_amount }}</p></div>
+    <div class="card"><h3>Invoices Sent</h3><p>{{ invoice_count }}</p></div>
+  </div>
+
+  <h2>Recent Payments</h2>
+  <table>
+    <tr><th>Invoice</th><th>Amount</th><th>Method</th><th>Date</th></tr>
+    {% for p in recent_payments %}
+    <tr><td>#{{ p.invoice_id }}</td><td>{{ p.amount }}</td><td>{{ p.get_method_display }}</td><td>{{ p.paid_on }}</td></tr>
+    {% empty %}
+    <tr><td colspan="4">No payments yet</td></tr>
+    {% endfor %}
+  </table>
+</body>
+</html>
