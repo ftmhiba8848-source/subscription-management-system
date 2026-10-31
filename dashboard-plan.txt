@@ -1,0 +1,32 @@
+FINANCE DASHBOARD PLAN
+
+GOAL
+Show money numbers on one page. It must load in under 2 seconds,
+even with thousands of invoices and payments.
+
+NUMBERS TO SHOW
+- Total revenue (all payments received)
+- Money still due (unpaid invoice balances)
+- Overdue invoices (count and amount)
+- Revenue for each month (last 12 months)
+- Number of invoices by status (paid, partly paid, overdue)
+
+KEEPING IT FAST
+- Do the sums in the database (Sum, Count, group by month), not in Python loops.
+- Use select_related for invoice and subscription lookups.
+- Add database indexes on invoice status, due date, and payment paid_on.
+- Cache the dashboard numbers for 5 minutes.
+- Show only the latest 20 invoices in the table, with page numbers.
+
+REPORTS
+- Revenue by month
+- Overdue invoice list
+- Payments by method (cash, card, UPI, bank transfer)
+- Option to download as CSV
+
+TESTING
+- Create 10,000 test invoices and check the page loads in under 2 seconds.
+
+OPEN QUESTIONS FOR THE TEAM
+- Who can see the dashboard (finance only, or everyone)?
+- Which currency is shown?
