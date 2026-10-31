@@ -1,0 +1,31 @@
+PAYMENT PLAN
+
+GOAL
+Record money received for an invoice, and keep the invoice status correct.
+
+INPUT
+- Invoice
+- Amount, method (cash, card, UPI, bank transfer), paid date, reference
+
+STEPS
+1. Check the invoice exists and is not already fully paid.
+2. Check the amount is more than 0.
+3. Check the amount is not more than the balance still due.
+4. Create the Payment.
+5. Balance due = invoice total - sum of all its payments.
+6. If balance due is 0, mark the invoice Paid.
+   If some money is paid, mark it Partially paid.
+7. Do all of this together or not at all (all or nothing).
+
+OVERDUE TRACKING
+- Every day, find invoices past their due date with balance due above 0.
+- Mark them Overdue.
+
+RULES
+- Use Decimal for all money.
+- Never delete a payment. To fix a mistake, add a correcting entry.
+- Show payments on the invoice page.
+
+OPEN QUESTIONS FOR THE TEAM
+- Are part payments allowed?
+- What are the exact invoice status names?
