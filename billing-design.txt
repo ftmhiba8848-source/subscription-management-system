@@ -1,0 +1,44 @@
+BILLING MODULE - TABLE DESIGN
+
+TAX
+- name
+- rate (percent)
+- is_active
+
+DISCOUNT
+- name
+- type (percent or fixed)
+- value
+- is_active
+
+INVOICE
+- subscription (link to Member 2's Subscription)
+- period_start
+- period_end
+- status (Draft / Sent / Paid / Overdue)
+- due_date
+- subtotal
+- tax_total
+- discount_total
+- total
+RULE: subscription + period_start must be unique (never bill twice)
+
+INVOICE LINE
+- invoice (link to Invoice)
+- description
+- quantity
+- unit_price
+- tax (link to Tax)
+- discount (link to Discount)
+- line_total
+
+PAYMENT
+- invoice (link to Invoice)
+- amount
+- method
+- paid_on
+- reference
+
+HOW THEY CONNECT
+- 1 Invoice has many Invoice Lines
+- 1 Invoice has many Payments
